@@ -44,5 +44,6 @@ export class TodosComponent implements OnInit {
     
   deleteTodo(id: string) {
     client.models.Todo.delete({ id })
+    
   }
 }
