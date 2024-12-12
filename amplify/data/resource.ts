@@ -43,7 +43,7 @@ const schema = a.schema({
       
       // Metadata fields
       dateOfBirth: a.date(),
-      registrationDate: a.datetime().default('${now}'),
+      registrationDate: a.string().default(() => Date.now()),
       
       // Optional preferences or settings
       preferences: a.json(),
