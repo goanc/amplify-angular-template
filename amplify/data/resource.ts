@@ -6,24 +6,62 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
+// const schema = a.schema({
+//   Todo: a
+//     .model({
+//       content: a.string(),
+//     })
+//     .authorization((allow) => [allow.publicApiKey()]),
+// });
+
+// export type Schema = ClientSchema<typeof schema>;
+
+// export const data = defineData({
+//   schema,
+//   authorizationModes: {
+//     defaultAuthorizationMode: 'apiKey',
+//     // API Key is used for a.allow.public() rules
+//     apiKeyAuthorizationMode: {
+//       expiresInDays: 30,
+//     },
+//   },
+// });
+
+//npx ampx generate outputs --app-id dfcm3a3wclj26 --branch main
+
 const schema = a.schema({
-  Todo: a
+  UserProfile: a
     .model({
-      content: a.string(),
+      // Basic user identification
+      email: a.string().required(),
+      username: a.string().required(),
+      
+      // Optional profile details
+      firstName: a.string(),
+      lastName: a.string(),
+      profilePictureUrl: a.string(),
+      
+      // Metadata fields
+      dateOfBirth: a.date(),
+      registrationDate: a.datetime().default(() => new Date()),
+      
+      // Optional preferences or settings
+      preferences: a.json(),
+      
+      // Example of adding relationships (optional)
+      // posts: a.hasMany('Post')  // If you want to link to another model later
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization((allow) => [
+      allow.authenticated().to(['read', 'create', 'update', 'delete']),
+      allow.guest().to(['read'])  // Optionally allow public read access
+    ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
-
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'apiKey',
-    // API Key is used for a.allow.public() rules
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
+    defaultAuthorizationMode: 'userPool', // More appropriate for user profiles
   },
 });
 
