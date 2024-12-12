@@ -12,38 +12,38 @@ const client = generateClient<Schema>();
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.css',
 })
-export class TodosComponent implements OnInit {
+export class TodosComponent {
   todos: any[] = [];
 
-  ngOnInit(): void {
-    this.listTodos();
-  }
+  // ngOnInit(): void {
+  //   this.listTodos();
+  // }
 
-  listTodos() {
-    try {
-      client.models.Todo.observeQuery().subscribe({
-        next: ({ items, isSynced }) => {
-          this.todos = items;
-        },
-      });
-    } catch (error) {
-      console.error('error fetching todos', error);
-    }
-  }
+  // listTodos() {
+  //   try {
+  //     client.models.Todo.observeQuery().subscribe({
+  //       next: ({ items, isSynced }) => {
+  //         this.todos = items;
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error('error fetching todos', error);
+  //   }
+  // }
 
-  createTodo() {
-    try {
-      client.models.Todo.create({
-        content: window.prompt('Todo content'),
-      });
-      this.listTodos();
-    } catch (error) {
-      console.error('error creating todos', error);
-    }
-  }
+  // createTodo() {
+  //   try {
+  //     client.models.Todo.create({
+  //       content: window.prompt('Todo content'),
+  //     });
+  //     this.listTodos();
+  //   } catch (error) {
+  //     console.error('error creating todos', error);
+  //   }
+  // }
     
-  deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
+  // deleteTodo(id: string) {
+  //   client.models.Todo.delete({ id })
     
-  }
+  // }
 }
