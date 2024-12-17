@@ -136,12 +136,12 @@ const schema = a.schema({
     title: a.string(),
     subtitle: a.string(),
     date: a.string(),
-    centered: a.boolean(),
+    centered: a.boolean().default(false),
 
     // Type-specific fields using a polymorphic approach
     text: a.string(),
     listItems: a.string().array(),
-    separator: a.string(),
+    separator: a.string().default(", "),
     school: a.string(),
     bullets: a.string().array(),
     

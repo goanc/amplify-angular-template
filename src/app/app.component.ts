@@ -6,6 +6,7 @@ import outputs from '../../amplify_outputs.json';
 import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
 import { getCurrentUser, signIn } from 'aws-amplify/auth'
 import { FormsModule } from '@angular/forms';
+import { ResumeService } from './resume.service';
 // import { UserProfileService } from './user-profile.service';
 
 Amplify.configure(outputs);
@@ -26,7 +27,7 @@ export class AppComponent {
   // constructor(public authenticator: AuthenticatorService, public profile: UserProfileService) {
   //   Amplify.configure(outputs);
   // }
-  constructor(public authenticator: AuthenticatorService) {
+  constructor(public authenticator: AuthenticatorService, public resume: ResumeService) {
     Amplify.configure(outputs);
   }
 
@@ -47,5 +48,13 @@ export class AppComponent {
 
   async getUser() {
     console.log(getCurrentUser());
+  }
+
+  async addBlock() {
+    this.resume.addBlock();
+  }
+
+  async getBlocks() {
+    this.resume.getBlocks();
   }
 }
