@@ -111,6 +111,7 @@ const schema = a.schema({
     id: a.id().required(),
     userID: a.string().required(),
     title: a.string().required(),
+    info: a.string().array(),
     lastModified: a.datetime(),
     groups: a.hasMany('ResumeGroup', 'resumeID')
   }),
