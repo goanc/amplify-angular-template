@@ -146,7 +146,8 @@ const schema = a.schema({
     
     // Support for nested blocks
     subblocks: a.hasMany('Block', 'parentBlockID'),
-    parentBlockID: a.string()
+    parentBlockID: a.string(),
+    parent: a.belongsTo('Block', 'parentBlockID'),
   })
 })
 .authorization((allow) => [
