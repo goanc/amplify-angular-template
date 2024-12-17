@@ -6,6 +6,7 @@ import outputs from '../../amplify_outputs.json';
 import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
 import { getCurrentUser, signIn } from 'aws-amplify/auth'
 import { FormsModule } from '@angular/forms';
+// import { UserProfileService } from './user-profile.service';
 
 Amplify.configure(outputs);
 
@@ -22,9 +23,20 @@ export class AppComponent {
   email = "";
   password = "";
     
+  // constructor(public authenticator: AuthenticatorService, public profile: UserProfileService) {
+  //   Amplify.configure(outputs);
+  // }
   constructor(public authenticator: AuthenticatorService) {
     Amplify.configure(outputs);
   }
+
+  // async getUsersByName(name: string) {
+  //   const results = await this.profile.listUserProfiles({
+  //     firstName: name
+  //   });
+
+  //   console.log(results);
+  // }
 
   async logIn() {
     await signIn({
